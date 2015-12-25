@@ -7,10 +7,7 @@
 from twilio.rest import TwilioRestClient
 import RPi.GPIO as GPIO
 import picamera
-import math, operator
 import time
-import socket
-import requests
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
