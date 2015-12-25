@@ -43,7 +43,7 @@ def motionSensor():
 			#is_active = True # Takes a Picture
 		else:
 			print("Inside of motion IF FALSE: ", motion)
-			snapImage(False)
+			#snapImage(False)
 			#is_active = False # Does Not take a Picture
 		
 		time.sleep(0.01)
