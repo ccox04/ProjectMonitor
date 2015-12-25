@@ -19,9 +19,10 @@ camera = picamera.PiCamera()
 
 client = TwilioRestClient(account='ACe3446369fe6f831be04eae238e9bdfa8', token='67fef0ff1be5813a0a162b22200ae2b7')
 
-def sendMessage(picture):
-	client.messages.create(to='+15407974693', from_='+15406135061', body="Carleigh is Moving!", media=picture)
+def sendMessage():
+	client.messages.create(to='+15407974693', from_='+15406135061', body="Carleigh is Moving!", media='/home/pi/ProjectMonitor/orig.jpg')
 	print('Just ran sendMessage', client)
+	motionSensor()
 
 
 # This function will be run in the thread.
@@ -56,7 +57,7 @@ def snapImage(is_active):
 			print('Infinite while')
 			# camera.capture('dump.jpg')
 			# time.sleep(3)
-			picture = camera.capture('orig.jpg') 
+			camera.capture('orig.jpg') 
 			time.sleep(3)
 			# camera.capture('update.jpg') #capture new image whenever there is a change
 
@@ -67,7 +68,7 @@ def snapImage(is_active):
 
 			#toSend = img2.resize((400, 400), Image.ANTIALIAS)
 			#toSend.save('latest.png')
-			sendMessage(picture)
+			sendMessage()
 		time.sleep(1)
 def main():
 	try:
