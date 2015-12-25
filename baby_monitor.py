@@ -27,6 +27,7 @@ def sendMessage():
 # This function will be run in the thread.
 def motionSensor():
 	while True:
+		print("Inside of motion while")
 		#Update sensor and LED states each loop
 		motion = GPIO.input(motion_sensor_pin)
 			
@@ -37,9 +38,11 @@ def motionSensor():
 #		flashthread.start() # start the thread
 
 		if motion:
+			print("Inside of motion IF TRUE: ", motion)
 			snapImage(True)
 			#is_active = True # Takes a Picture
 		else:
+			print("Inside of motion IF FALSE: ", motion)
 			snapImage(False)
 			#is_active = False # Does Not take a Picture
 		
