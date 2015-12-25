@@ -32,7 +32,7 @@ def motionSensor():
 			
 		is_active = [False] # It's a list because it'll get passed to the thread by reference this way, not by value.
 		# If we just passed False as an argument, changing the local variable here wouldn't change the thread's variable.
-		flashthread = Thread(target=flash, args=(is_active,))
+		flashthread = Thread(target=snapImage, args=(is_active,))
 		flashthread.daemon = True
 		flashthread.start() # start the thread
 
