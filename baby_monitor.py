@@ -5,14 +5,14 @@
 # Description: Created a program that uses break beam LEDs to detect movement.
 # It then relays the detection to the camera pi to take a snap shot.
 from twilio.rest import TwilioRestClient
-from threading import Thread
+#from threading import Thread
 import RPi.GPIO as GPIO
 import picamera
 import time
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-motion_sensor_pin = 24
+motion_sensor_pin = 11
 GPIO.setup(motion_sensor_pin, GPIO.IN)
 
 camera = picamera.PiCamera()
@@ -30,16 +30,18 @@ def motionSensor():
 		#Update sensor and LED states each loop
 		motion = GPIO.input(motion_sensor_pin)
 			
-		is_active = [False] # It's a list because it'll get passed to the thread by reference this way, not by value.
-		# If we just passed False as an argument, changing the local variable here wouldn't change the thread's variable.
-		flashthread = Thread(target=snapImage, args=(is_active,))
-		flashthread.daemon = True
-		flashthread.start() # start the thread
+#		is_active = [False] # It's a list because it'll get passed to the thread by reference this way, not by value.
+#		# If we just passed False as an argument, changing the local variable here wouldn't change the thread's variable.
+#		flashthread = Thread(target=snapImage, args=(is_active,))
+#		flashthread.daemon = True
+#		flashthread.start() # start the thread
 
 		if motion:
-			is_active[0] = True # Takes a Picture
+			snapImage(True)
+			#is_active = True # Takes a Picture
 		else:
-			is_active[0] = False # Does Not take a Picture
+			snapImage(False)
+			#is_active = False # Does Not take a Picture
 		
 		time.sleep(0.01)
 
@@ -47,7 +49,7 @@ def snapImage(is_active):
 	while True:
 		if len(is_active) == 0: # empty list means exit, for our purposes
 			break # jump out of this infinite while loop and exit this thread
-		if is_active[0]:
+		if is_active:
 			print('Infinite while')
 			camera.capture('dump.jpg')
 			time.sleep(3)
