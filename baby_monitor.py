@@ -47,8 +47,8 @@ def motionSensor():
 
 def snapImage(is_active):
 	while True:
-		if len(is_active) == 0: # empty list means exit, for our purposes
-			break # jump out of this infinite while loop and exit this thread
+		#if len(is_active) == 0: # empty list means exit, for our purposes
+		#	break # jump out of this infinite while loop and exit this thread
 		if is_active:
 			print('Infinite while')
 			camera.capture('dump.jpg')
