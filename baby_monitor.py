@@ -57,13 +57,13 @@ def snapImage(is_active):
 			time.sleep(3)
 			camera.capture('update.jpg') #capture new image whenever there is a change
 
-			img1 = Image.open('orig.jpg')
-			img2 = Image.open('update.jpg')
+			#img1 = Image.open('orig.jpg')
+			#img2 = Image.open('update.jpg')
 
 			print ("Captured Images")
 
-			toSend = img2.resize((400, 400), Image.ANTIALIAS)
-			toSend.save('latest.png')
+			#toSend = img2.resize((400, 400), Image.ANTIALIAS)
+			#toSend.save('latest.png')
 			sendMessage()
 		time.sleep(1)
 def main():
