@@ -14,10 +14,6 @@ GPIO.setwarnings(False)
 motion_sensor_pin = 24
 GPIO.setup(motion_sensor_pin, GPIO.IN)
 
-LED = 18
-#Set up output LED indicators
-GPIO.setup(motion_LED_pin, GPIO.OUT)
-
 camera = picamera.PiCamera()
 
 client = TwilioRestClient(account='ACe3446369fe6f831be04eae238e9bdfa8', token='67fef0ff1be5813a0a162b22200ae2b7')
@@ -32,7 +28,6 @@ def motionSensor():
 	while True:
 		#Update sensor and LED states each loop
 		motion = GPIO.input(motion_sensor_pin)
-		GPIO.output(motion_LED_pin, motion)
 			
 		is_active = [False] # It's a list because it'll get passed to the thread by reference this way, not by value.
 		# If we just passed False as an argument, changing the local variable here wouldn't change the thread's variable.
@@ -50,7 +45,6 @@ def motionSensor():
 def snapImage(is_active):
 	while True:
 		if len(is_active) == 0: # empty list means exit, for our purposes
-			GPIO.output(LED,GPIO.LOW) # Turn off LED
 			break # jump out of this infinite while loop and exit this thread
 		if is_active[0]:
 			print('Infinite while')
