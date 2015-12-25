@@ -19,8 +19,8 @@ camera = picamera.PiCamera()
 
 client = TwilioRestClient(account='ACe3446369fe6f831be04eae238e9bdfa8', token='67fef0ff1be5813a0a162b22200ae2b7')
 
-def sendMessage():
-	client.messages.create(to='+15407974693', from_='+15406135061', body="Carleigh is Moving!", media='orig.jpg')
+def sendMessage(picture):
+	client.messages.create(to='+15407974693', from_='+15406135061', body="Carleigh is Moving!", media=picture)
 	print('Just ran sendMessage', client)
 
 
@@ -54,11 +54,11 @@ def snapImage(is_active):
 		#	break # jump out of this infinite while loop and exit this thread
 		if is_active:
 			print('Infinite while')
-			camera.capture('dump.jpg')
+			# camera.capture('dump.jpg')
+			# time.sleep(3)
+			picture = camera.capture('orig.jpg') 
 			time.sleep(3)
-			camera.capture('orig.jpg') 
-			time.sleep(3)
-			camera.capture('update.jpg') #capture new image whenever there is a change
+			# camera.capture('update.jpg') #capture new image whenever there is a change
 
 			#img1 = Image.open('orig.jpg')
 			#img2 = Image.open('update.jpg')
@@ -67,7 +67,7 @@ def snapImage(is_active):
 
 			#toSend = img2.resize((400, 400), Image.ANTIALIAS)
 			#toSend.save('latest.png')
-			sendMessage()
+			sendMessage(picture)
 		time.sleep(1)
 def main():
 	try:
