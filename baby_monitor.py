@@ -4,7 +4,7 @@
 # Credit goes to: 
 # Description: Created a program that uses break beam LEDs to detect movement.
 # It then relays the detection to the camera pi to take a snap shot.
-from PIL import Image, ImageFilter, ImageChops
+from Pillow import Image, ImageFilter, ImageChops
 from twilio.rest import TwilioRestClient
 import RPi.GPIO as GPIO
 import picamera
