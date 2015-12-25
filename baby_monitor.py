@@ -5,6 +5,7 @@
 # Description: Created a program that uses break beam LEDs to detect movement.
 # It then relays the detection to the camera pi to take a snap shot.
 from twilio.rest import TwilioRestClient
+from threading import Thread
 import RPi.GPIO as GPIO
 import picamera
 import time
